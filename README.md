@@ -1,16 +1,64 @@
-# React + Vite
+# Infinite Dog App - React Version
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based web application that displays an infinite slideshow of dog images by breed using the Dog CEO API.
 
-Currently, two official plugins are available:
+## Author
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Salavuddin Shaik  
+Lewis University  
+Software Architecture and Design  
+CPSC-61200-003
 
-## React Compiler
+## AI Usage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project was developed with assistance from Claude AI for:
 
-## Expanding the ESLint configuration
+- Understanding React hooks (useState, useEffect, useRef)
+- Debugging component lifecycle issues
+- Optimizing timer cleanup and memory management
+- Troubleshooting Azure Static Web App deployment configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Credits and Attribution
+
+**Primary Credit:** This application is based on the excellent tutorial by **Brad Schiff** (LearnWebCode):
+- Tutorial: "Dogs, JavaScript & An API 🐶 Fetch, Promises & Async Await"
+- YouTube Channel: https://www.youtube.com/c/LearnWebCode
+
+**API Credit:** Dog images and breed data provided by the **Dog CEO API**
+- API Documentation: https://dog.ceo/dog-api/
+
+## Description
+
+This is a React implementation of the Infinite Dog Slideshow application. Users can:
+
+- Select from a comprehensive list of dog breeds
+- View an automated slideshow of dog images for the selected breed
+- Experience smooth fade transitions between images
+- Enjoy a responsive design that works on all devices
+
+## Technologies
+
+- React 18
+- Vite (Build tool)
+- JavaScript (ES6+)
+- CSS3
+- Dog CEO API
+- Azure Static Website Hosting
+
+## Architecture
+
+This application demonstrates modern React patterns:
+
+- **Component-Based Architecture**: Single App component with clear responsibilities
+- **React Hooks**: useState for state management, useEffect for side effects, useRef for timer references
+- **Declarative Rendering**: JSX describes UI based on state
+- **Async/Await**: Modern asynchronous JavaScript for API calls
+
+## Live Demo
+
+https://dogsreactsal.z14.web.core.windows.net/
+
+## Repository
+
+https://github.com/SalavuddinShaik/DogsAPI-React
+
