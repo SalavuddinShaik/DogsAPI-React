@@ -35,5 +35,5 @@ jobs:
           --account-name dogsreactsal \
           --account-key "${{ secrets.AZURE_STORAGE_KEY }}" \
           --destination '$web' \
-          --source ./build \
+          --source ./dist \
           --overwrite
