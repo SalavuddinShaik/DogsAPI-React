@@ -12,7 +12,7 @@ function App() {
   // State for breeds list
   const [breeds, setBreeds] = useState({});
   // State for selected breed
-  const [selectedBreed, setSelectedBreed] = useState("");
+  const [selectedBreed, setSelectedBreed] = useState("Choose a dog breed");
   // State for images array
   const [images, setImages] = useState([]);
   // State for current slides being displayed
@@ -124,7 +124,7 @@ function App() {
         <h1>Infinite Dog App - Team Sprint 5</h1>
         <div className="breed">
           <select onChange={handleBreedChange} value={selectedBreed}>
-            <option>Choose a dog breed</option>
+            <option value="Choose a dog breed">Choose a dog breed</option>
             {Object.keys(breeds).map((breed) => (
               <option key={breed} value={breed}>
                 {breed}
