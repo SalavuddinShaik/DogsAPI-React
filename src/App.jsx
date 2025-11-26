@@ -6,9 +6,11 @@
  */
 
 import { useState, useEffect, useRef } from "react";
+import { AuthProvider } from "./AuthContext.jsx";
+import Login from "./components/Login.jsx";
 import "./App.css";
 
-function App() {
+function DogApp() {
   // State for breeds list
   const [breeds, setBreeds] = useState({});
   // State for selected breed
@@ -20,11 +22,11 @@ function App() {
   // Track current position in images array
   const [currentPosition, setCurrentPosition] = useState(0);
 
-  // Refs for timers (like your timer and deleteFirstPhotoDelay variables)
+  // Refs for timers
   const timerRef = useRef(null);
   const deleteTimeoutRef = useRef(null);
 
-  // Fetch breed list on component mount (replaces your start() function)
+  // Fetch breed list on component mount
   useEffect(() => {
     async function fetchBreeds() {
       try {
@@ -36,9 +38,9 @@ function App() {
       }
     }
     fetchBreeds();
-  }, []); // Empty array = run once when component loads
+  }, []);
 
-  // Load images when breed is selected (replaces your loadByBreed function)
+  // Load images when breed is selected
   useEffect(() => {
     async function loadImages() {
       if (selectedBreed && selectedBreed !== "Choose a dog breed") {
@@ -55,11 +57,10 @@ function App() {
       }
     }
     loadImages();
-  }, [selectedBreed]); // Run whenever selectedBreed changes
+  }, [selectedBreed]);
 
-  // Setup slideshow when images change (replaces your createSlideshow function)
+  // Setup slideshow when images change
   useEffect(() => {
-    // Clear existing timers
     if (timerRef.current) clearInterval(timerRef.current);
     if (deleteTimeoutRef.current) clearTimeout(deleteTimeoutRef.current);
 
@@ -76,14 +77,12 @@ function App() {
       return;
     }
 
-    // Initialize with first two images
     setCurrentSlides([
       { id: 0, url: images[0] },
       { id: 1, url: images[1] },
     ]);
     setCurrentPosition(2);
 
-    // Start slideshow timer (like your setInterval)
     timerRef.current = setInterval(() => {
       setCurrentPosition((prev) => {
         const nextPos = prev >= images.length ? 0 : prev;
@@ -94,7 +93,6 @@ function App() {
             { id: Date.now(), url: images[nextPos] },
           ];
 
-          // Remove first slide after transition
           deleteTimeoutRef.current = setTimeout(() => {
             setCurrentSlides((slides) => slides.slice(1));
           }, 1000);
@@ -106,14 +104,12 @@ function App() {
       });
     }, 3000);
 
-    // Cleanup function (runs when component unmounts or images change)
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
       if (deleteTimeoutRef.current) clearTimeout(deleteTimeoutRef.current);
     };
   }, [images]);
 
-  // Handle breed selection (replaces your onchange attribute)
   const handleBreedChange = (e) => {
     setSelectedBreed(e.target.value);
   };
@@ -121,7 +117,12 @@ function App() {
   return (
     <div className="app">
       <div className="header">
-        <h1>Infinite Dog App - Team Sprint 5</h1>
+        <h1>🐕 Infinite Dog App - Sprint 6</h1>
+        <p>Lewis Instructional Software Architecture</p>
+
+        {/* Authentication Section */}
+        <Login />
+
         <div className="breed">
           <select onChange={handleBreedChange} value={selectedBreed}>
             <option value="Choose a dog breed">Choose a dog breed</option>
@@ -145,6 +146,14 @@ function App() {
         ))}
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <DogApp />
+    </AuthProvider>
   );
 }
 
