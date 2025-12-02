@@ -2,7 +2,7 @@
  * Dogs API React Application
  * Author: Salavuddin Shaik
  * Course: Software Architecture and Design - Lewis University
- * Based on Brad Schiff's tutorial: "Dogs, JavaScript & An API 🐶 Fetch, Promises & Async Await"
+ * Sprint 7 - With Firebase Authentication & Firestore
  */
 
 import { useState, useEffect, useRef } from "react";
@@ -11,22 +11,15 @@ import Login from "./components/Login.jsx";
 import "./App.css";
 
 function DogApp() {
-  // State for breeds list
   const [breeds, setBreeds] = useState({});
-  // State for selected breed
   const [selectedBreed, setSelectedBreed] = useState("Choose a dog breed");
-  // State for images array
   const [images, setImages] = useState([]);
-  // State for current slides being displayed
   const [currentSlides, setCurrentSlides] = useState([]);
-  // Track current position in images array
   const [currentPosition, setCurrentPosition] = useState(0);
 
-  // Refs for timers
   const timerRef = useRef(null);
   const deleteTimeoutRef = useRef(null);
 
-  // Fetch breed list on component mount
   useEffect(() => {
     async function fetchBreeds() {
       try {
@@ -40,7 +33,6 @@ function DogApp() {
     fetchBreeds();
   }, []);
 
-  // Load images when breed is selected
   useEffect(() => {
     async function loadImages() {
       if (selectedBreed && selectedBreed !== "Choose a dog breed") {
@@ -59,7 +51,6 @@ function DogApp() {
     loadImages();
   }, [selectedBreed]);
 
-  // Setup slideshow when images change
   useEffect(() => {
     if (timerRef.current) clearInterval(timerRef.current);
     if (deleteTimeoutRef.current) clearTimeout(deleteTimeoutRef.current);
@@ -117,18 +108,33 @@ function DogApp() {
   return (
     <div className="app">
       <div className="header">
-        <h1>🐕 Infinite Dog App - Sprint 6</h1>
-        <p>Lewis Instructional Software Architecture</p>
+        <h1>🐕 DogsAPICloudArchitecture</h1>
+        <p className="subtitle">
+          Lewis Instructional Software Architecture - Sprint 7
+        </p>
+        <p className="team">
+          Team: Salavuddin Shaik, Dhrumil, Abhirekha Thimmasani
+        </p>
 
         {/* Authentication Section */}
         <Login />
 
         <div className="breed">
+          <label
+            style={{
+              color: "#fff",
+              marginBottom: "10px",
+              display: "block",
+              fontSize: "16px",
+            }}
+          >
+            🔍 Select a breed to explore:
+          </label>
           <select onChange={handleBreedChange} value={selectedBreed}>
             <option value="Choose a dog breed">Choose a dog breed</option>
             {Object.keys(breeds).map((breed) => (
               <option key={breed} value={breed}>
-                {breed}
+                {breed.charAt(0).toUpperCase() + breed.slice(1)}
               </option>
             ))}
           </select>
@@ -144,6 +150,20 @@ function DogApp() {
             }}
           />
         ))}
+      </div>
+
+      {/* Footer */}
+      <div
+        style={{
+          textAlign: "center",
+          padding: "20px",
+          backgroundColor: "#1a1a2e",
+          color: "#888",
+          fontSize: "14px",
+        }}
+      >
+        <p>© 2025 DogsAPICloudArchitecture | Lewis University</p>
+        <p>Built with React, Firebase, Azure & ❤️</p>
       </div>
     </div>
   );
